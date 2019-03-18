@@ -92,11 +92,20 @@ server.put("/api/users/:id", (req, res) => {
 
 	db.update(id, user)
 		.then(user => {
+			// Check if user exists
 			if (!user)
 				return res.status(404).json({
 					message: "The user with the specified ID does not exist."
 				});
-			res.status(200).json(user);
+
+			// Check if fields are empty
+			if (!req.name || !req.bio)
+				return res.status(400).json({
+					errorMessage: "Please provide name and bio for the user."
+				});
+
+			// Return updated user on success
+			return res.status(200).json(user);
 		})
 		.catch(err => {
 			res.status(500).json({
