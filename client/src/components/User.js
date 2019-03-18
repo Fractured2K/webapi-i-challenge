@@ -14,7 +14,33 @@ const User = props => {
 		isEditing: false
 	});
 
+	// handle edit check
 	const handleIsEditing = () => {
+		setValues({
+			...user,
+			isEditing: !user.isEditing
+		});
+	};
+
+	// handle form changes
+	const handleUpdateValue = e => {
+		setValues({
+			...user,
+			[e.target.name]: e.target.value
+		});
+	};
+
+	// handle update user
+	const handleUpdateUser = e => {
+		e.preventDefault();
+
+		const updateUser = {
+			name: user.name,
+			bio: user.bio
+		};
+
+		props.updateUser(updateUser, props.id);
+
 		setValues({
 			...user,
 			isEditing: !user.isEditing
@@ -23,7 +49,6 @@ const User = props => {
 
 	return (
 		<div className="user">
-			{console.log(user.isEditing)}
 			{!user.isEditing ? (
 				<div>
 					<h1>{user.name}</h1>
@@ -48,9 +73,20 @@ const User = props => {
 				</div>
 			) : (
 				<div>
-					<form>
-						<input placeholder="name" />
-						<input placeholder="bio" />
+					<form className="user-form" onSubmit={handleUpdateUser}>
+						<input
+							value={user.name}
+							name="name"
+							placeholder="name"
+							onChange={handleUpdateValue}
+						/>
+						<input
+							value={user.bio}
+							name="bio"
+							placeholder="bio"
+							onChange={handleUpdateValue}
+						/>
+						<button>Add User</button>
 					</form>
 					<button onClick={handleIsEditing}>Cancel</button>
 				</div>

@@ -32,6 +32,13 @@ function App() {
 		setUser(updatedUsers);
 	};
 
+	const updateUser = async (user, id) => {
+		const res = await axios.put(
+			`http://localhost:3001/api/users/${id}`,
+			user
+		);
+	};
+
 	// Delete user
 	const deleteUser = async id => {
 		await axios.delete(`http://localhost:3001/api/users/${id}`);
@@ -42,7 +49,12 @@ function App() {
 	return (
 		<div className="user-list">
 			{users.map(user => (
-				<User key={user.id} {...user} deleteUser={deleteUser} />
+				<User
+					key={user.id}
+					{...user}
+					updateUser={updateUser}
+					deleteUser={deleteUser}
+				/>
 			))}
 
 			<AddUser addUser={addUser} />
