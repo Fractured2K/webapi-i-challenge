@@ -67,6 +67,9 @@ server.get("/api/users/:id", (req, res) => {
 		});
 });
 
+// Delete user endpoint
+server.delete("/api/users/:id", (req, res) => {});
+
 server.listen(3001, () => {
 	console.log(`=== Server now listening on http://localhost:3001 ===`);
 });
