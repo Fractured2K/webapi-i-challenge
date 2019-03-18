@@ -2,31 +2,45 @@ import React, { useState } from "react";
 
 const AddUser = props => {
 	// Form state
-	const [form, setValues] = useState({
+	const [user, setValues] = useState({
 		name: "",
 		bio: ""
 	});
 
-	const updateValue = e => {
+	// handle form changes
+	const handleUpdateValue = e => {
 		setValues({
-			...form,
+			...user,
 			[e.target.name]: e.target.value
 		});
 	};
 
+	// add user event handler
+	const handleAddUser = e => {
+		e.preventDefault();
+
+		props.addUser(user);
+
+		setValues({
+			...user,
+			name: "",
+			bio: ""
+		});
+	};
+
 	return (
-		<form className="user-form" onSubmit={props.addUser}>
+		<form className="user-form" onSubmit={handleAddUser}>
 			<input
-				value={form.name}
+				value={user.name}
 				name="name"
 				placeholder="name"
-				onChange={updateValue}
+				onChange={handleUpdateValue}
 			/>
 			<input
-				value={form.bio}
+				value={user.bio}
 				name="bio"
 				placeholder="bio"
-				onChange={updateValue}
+				onChange={handleUpdateValue}
 			/>
 			<button>Add User</button>
 		</form>

@@ -22,7 +22,14 @@ function App() {
 	// Add user
 	const addUser = async user => {
 		const res = await axios.post("http://localhost:3001/api/users", user);
-		setUser(...users, res.data);
+
+		// give user object a propert of id and set its value to the response id
+		user.id = res.data.id;
+
+		// add new user onto users array
+		const updatedUsers = [...users, user];
+
+		setUser(updatedUsers);
 	};
 
 	// Delete user
@@ -35,15 +42,10 @@ function App() {
 	return (
 		<div className="user-list">
 			{users.map(user => (
-				<User
-					key={user.id}
-					{...user}
-					addUser={addUser}
-					deleteUser={deleteUser}
-				/>
+				<User key={user.id} {...user} deleteUser={deleteUser} />
 			))}
 
-			<AddUser />
+			<AddUser addUser={addUser} />
 		</div>
 	);
 }
