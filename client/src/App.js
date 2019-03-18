@@ -18,7 +18,7 @@ function App() {
 	}, []);
 
 	return (
-		<div>
+		<div className="user-list">
 			{users.map(user => (
 				<User key={user.id} {...user} />
 			))}
