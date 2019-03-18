@@ -71,7 +71,7 @@ server.get("/api/users/:id", (req, res) => {
 server.delete("/api/users/:id", (req, res) => {
 	const { id } = req.params;
 
-	db.remove()
+	db.remove(id)
 		.then(user => {
 			if (!user)
 				return res.status(404).json({
@@ -84,6 +84,9 @@ server.delete("/api/users/:id", (req, res) => {
 			res.status(500).json({ error: "The user could not be removed" });
 		});
 });
+
+// Update user endpoint
+server.put("/api/users/:id", (req, res) => {});
 
 server.listen(3001, () => {
 	console.log(`=== Server now listening on http://localhost:3001 ===`);
