@@ -16,7 +16,11 @@ function App() {
 
 	return (
 		<div>
-			<h1>{console.log(users)}</h1>
+			<h1>
+				{users.map(user => {
+					<User key={user.id} {...user} />;
+				})}
+			</h1>
 		</div>
 	);
 }
