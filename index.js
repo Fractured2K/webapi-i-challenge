@@ -90,18 +90,21 @@ server.put("/api/users/:id", (req, res) => {
 	const { id } = req.params;
 	const user = req.body;
 
+	// Check if fields are empty
+	if (!user.name || !user.bio)
+		return res
+			.status(404)
+			.json({
+				errorMessage: "Please provide name and bio for the user."
+			})
+			.end();
+
 	db.update(id, user)
 		.then(user => {
 			// Check if user exists
 			if (!user)
 				return res.status(404).json({
 					message: "The user with the specified ID does not exist."
-				});
-
-			// Check if fields are empty
-			if (!req.name || !req.bio)
-				return res.status(400).json({
-					errorMessage: "Please provide name and bio for the user."
 				});
 
 			// Return updated user on success
