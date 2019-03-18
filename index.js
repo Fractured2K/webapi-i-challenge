@@ -5,6 +5,9 @@ const db = require("./data/db");
 
 const server = express();
 
+// Middleware
+server.use(express.json()); // parse incoming json
+
 // Create user endpoint
 server.post("/api/users", (req, res) => {
 	const user = req.body;
