@@ -11,7 +11,6 @@ server.use(express.json()); // parse incoming json
 // Create user endpoint
 server.post("/api/users", (req, res) => {
 	const user = req.body;
-	console.log(user);
 
 	// Check for empty name or body
 	if (!user.name || !user.bio)
@@ -47,6 +46,9 @@ server.get("/api/users", (req, res) => {
 			});
 		});
 });
+
+// Get user by id endpoint
+server.get("/api/users/:id", (req, res) => {});
 
 server.listen(3001, () => {
 	console.log(`=== Server now listening on http://localhost:3001 ===`);
