@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 // database
 const db = require("./data/db");
@@ -7,6 +8,7 @@ const server = express();
 
 // Middleware
 server.use(express.json()); // parse incoming json
+server.use(cors()); // enable cross origin resource sharing
 
 // Create user endpoint
 server.post("/api/users", (req, res) => {
