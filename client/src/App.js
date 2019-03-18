@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function App() {
-	const [users, setUser] = useState({ users: [] });
+// Components
+import User from "./components/User";
 
-	useEffect(async () => {
+function App() {
+	const [users, setUser] = useState([]);
+
+	useEffect(() => {
 		const fetchUsers = async () => {
-			const res = await axios("http://localhost:3001/api/users");
+			const res = await axios.get("http://localhost:3001/api/users");
 
 			setUser(res.data);
 		};
@@ -16,11 +19,9 @@ function App() {
 
 	return (
 		<div>
-			<h1>
-				{users.map(user => {
-					<User key={user.id} {...user} />;
-				})}
-			</h1>
+			{users.map(user => (
+				<User key={user.id} {...user} />
+			))}
 		</div>
 	);
 }
