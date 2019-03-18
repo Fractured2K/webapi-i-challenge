@@ -86,7 +86,20 @@ server.delete("/api/users/:id", (req, res) => {
 });
 
 // Update user endpoint
-server.put("/api/users/:id", (req, res) => {});
+server.put("/api/users/:id", (req, res) => {
+	const { id } = req.params;
+	const user = req.body;
+
+	db.update(id, user)
+		.then(user => {
+			res.status(200).json(user);
+		})
+		.catch(err => {
+			res.status(500).json({
+				error: "The user information could not be modified."
+			});
+		});
+});
 
 server.listen(3001, () => {
 	console.log(`=== Server now listening on http://localhost:3001 ===`);
