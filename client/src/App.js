@@ -3,6 +3,7 @@ import axios from "axios";
 
 // Components
 import User from "./components/User";
+import AddUser from "./components/AddUser";
 
 function App() {
 	// Users state
@@ -19,7 +20,10 @@ function App() {
 	}, []);
 
 	// Add user
-	const addUser = async () => {};
+	const addUser = async user => {
+		const res = await axios.post("http://localhost:3001/api/users", user);
+		setUser(...users, res.data);
+	};
 
 	// Delete user
 	const deleteUser = async id => {
@@ -31,8 +35,15 @@ function App() {
 	return (
 		<div className="user-list">
 			{users.map(user => (
-				<User key={user.id} {...user} deleteUser={deleteUser} />
+				<User
+					key={user.id}
+					{...user}
+					addUser={addUser}
+					deleteUser={deleteUser}
+				/>
 			))}
+
+			<AddUser />
 		</div>
 	);
 }
