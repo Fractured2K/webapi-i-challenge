@@ -68,7 +68,17 @@ server.get("/api/users/:id", (req, res) => {
 });
 
 // Delete user endpoint
-server.delete("/api/users/:id", (req, res) => {});
+server.delete("/api/users/:id", (req, res) => {
+	const { id } = req.params;
+
+	db.remove()
+		.then(user => {
+			res.status(200).json(user);
+		})
+		.catch(err => {
+			res.status(500).json({ error: "The user could not be removed" });
+		});
+});
 
 server.listen(3001, () => {
 	console.log(`=== Server now listening on http://localhost:3001 ===`);
