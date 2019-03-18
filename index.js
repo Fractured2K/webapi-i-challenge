@@ -92,6 +92,10 @@ server.put("/api/users/:id", (req, res) => {
 
 	db.update(id, user)
 		.then(user => {
+			if (!user)
+				return res.status(404).json({
+					message: "The user with the specified ID does not exist."
+				});
 			res.status(200).json(user);
 		})
 		.catch(err => {
