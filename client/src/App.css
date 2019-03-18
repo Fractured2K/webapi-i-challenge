@@ -34,12 +34,28 @@ body {
 	padding: 10px 0;
 }
 
+.update {
+	background: blue;
+	border: none;
+	position: relative;
+	left: 39%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	border-radius: 20px;
+	font-size: 14px;
+	margin: 0 4px;
+}
+
 .delete {
 	background: red;
 	border: none;
 	position: relative;
-	left: 40%;
-	border-radius: 50%;
+	left: 38%;
+	border-radius: 20px;
 	width: 30px;
 	height: 30px;
+	text-align: center;
+	font-size: 14px;
+	margin: 0 4px;
 }
