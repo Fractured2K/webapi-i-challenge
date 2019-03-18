@@ -17,7 +17,10 @@ const User = props => {
 				<FontAwesomeIcon icon={faPencilAlt} style={{ color: "#fff" }} />
 			</button>
 
-			<button className="delete">
+			<button
+				onClick={() => props.deleteUser(props.id)}
+				className="delete"
+			>
 				<FontAwesomeIcon icon={faTrashAlt} style={{ color: "#fff" }} />
 			</button>
 		</div>
