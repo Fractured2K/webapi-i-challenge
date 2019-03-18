@@ -12,21 +12,20 @@ function App() {
 	useEffect(() => {
 		const fetchUsers = async () => {
 			const res = await axios.get("http://localhost:3001/api/users");
-
 			setUser(res.data);
 		};
 
 		fetchUsers();
 	}, []);
 
+	// Add user
+	const addUser = async () => {};
+
 	// Delete user
 	const deleteUser = async id => {
 		await axios.delete(`http://localhost:3001/api/users/${id}`);
-
-		// If user id is equal to passed in id don't return
-		const data = users.filter(user => user.id !== id);
-
-		setUser(data);
+		const updatedUsers = users.filter(user => user.id !== id);
+		setUser(updatedUsers);
 	};
 
 	return (
@@ -34,12 +33,6 @@ function App() {
 			{users.map(user => (
 				<User key={user.id} {...user} deleteUser={deleteUser} />
 			))}
-
-			<form className="user-form">
-				<input placeholder="name" />
-				<input placeholder="bio" />
-				<button>Add User</button>
-			</form>
 		</div>
 	);
 }
