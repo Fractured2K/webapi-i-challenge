@@ -13,7 +13,7 @@ server.post("/api/users", (req, res) => {
 	const user = req.body;
 
 	// Check for empty name or body
-	if (!user.name || !user.body)
+	if (!user.name || !user.bio)
 		return res
 			.status(404)
 			.json({
