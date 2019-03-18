@@ -9,7 +9,7 @@ function App() {
 	// Users state
 	const [users, setUser] = useState([]);
 
-	// Get users on mount
+	// Get users on component did mount
 	useEffect(() => {
 		const fetchUsers = async () => {
 			const res = await axios.get("http://localhost:3001/api/users");
