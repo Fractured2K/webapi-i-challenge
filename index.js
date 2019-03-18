@@ -1,5 +1,8 @@
 const express = require("express");
 
+// database
+const db = require("./data/db");
+
 const server = express();
 
 server.listen(3001, () => {
