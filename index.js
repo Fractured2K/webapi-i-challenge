@@ -9,6 +9,7 @@ const server = express();
 server.post("/api/users", (req, res) => {
 	const user = req.body;
 
+	// Check for empty name or body
 	if (!user.name || !user.body)
 		return res
 			.status(404)
@@ -16,6 +17,18 @@ server.post("/api/users", (req, res) => {
 				errorMessage: "Please provide name and bio for the user."
 			})
 			.end();
+
+	// Add user to database
+	db.insert(user)
+		.then(user => {
+			res.status(201).json(user);
+		})
+		.catch(err => {
+			res.status(500).json({
+				error:
+					"There was an error while saving the user to the database"
+			});
+		});
 });
 
 server.listen(3001, () => {
