@@ -86,7 +86,7 @@ const User = props => {
 							placeholder="bio"
 							onChange={handleUpdateValue}
 						/>
-						<button>Add User</button>
+						<button>Update User</button>
 					</form>
 					<button onClick={handleIsEditing}>Cancel</button>
 				</div>

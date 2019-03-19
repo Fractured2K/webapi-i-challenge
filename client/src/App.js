@@ -32,11 +32,9 @@ function App() {
 		setUser(updatedUsers);
 	};
 
+	// Update user
 	const updateUser = async (user, id) => {
-		const res = await axios.put(
-			`http://localhost:3001/api/users/${id}`,
-			user
-		);
+		await axios.put(`http://localhost:3001/api/users/${id}`, user);
 	};
 
 	// Delete user
